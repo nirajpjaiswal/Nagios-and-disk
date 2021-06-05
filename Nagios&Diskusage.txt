@@ -1,0 +1,78 @@
+To check the disk space on instances shell script:
+
+# vi /opt/scripts/disk-usage-multiple.sh
+
+#!/bin/sh
+output1=/tmp/disk-usage.out
+echo "---------------------------------------------------------------------------"
+echo "HostName            Filesystem                Size Used Avail Use% Mounted on"
+echo "---------------------------------------------------------------------------"
+for server in `more /opt/scripts/servers.txt`
+do
+output=`ssh $server df -Ph | tail -n +2 | sed s/%//g | awk '{ if($5 > 80) print $0;}'`
+echo "$server: $output" >> $output1
+done
+cat $output1 | grep G | column -t
+rm $output1
+
+############################################################################################
+Make a script for to instllation of monitotring tool:
+
+#!/bin/bash
+sudo apt-get update
+sudo apt-get install wget build-essential unzip openssl libssl-dev
+sudo apt-get install apache2 php libapache2-mod-php php-gd libgd-dev 
+
+
+#Create Nagios User
+sudo adduser nagios
+
+#create a group 
+sudo groupadd nagcmd
+sudo usermod -a -G nagcmd nagios
+sudo usermod -a -G nagcmd www-data
+
+
+#Install Nagios Core Service
+
+cd /opt/
+wget https://assets.nagios.com/downloads/nagioscore/releases/nagios-4.4.5.tar.gz
+tar xzf nagios-4.4.5.tar.gz
+
+cd nagios-4.4.5
+sudo ./configure --with-command-group=nagcmd
+sudo make all
+sudo make install
+sudo make install-init
+sudo make install-daemoninit
+sudo make install-config
+sudo make install-commandmode
+sudo make install-exfoliation
+
+cp -R contrib/eventhandlers/ /usr/local/nagios/libexec/
+chown -R nagios:nagios /usr/local/nagios/libexec/eventhandlers
+
+#set password for user
+htpasswd -c /usr/local/nagios/etc/htpasswd.users nagiosadmin
+
+#enable Apache configuration and restart Apache service
+sudo a2enconf nagios
+sudo a2enmod cgi rewrite
+sudo service apache2 restart
+
+#Installing Nagios Plugins
+cd /opt
+wget http://www.nagios-plugins.org/download/nagios-plugins-2.2.1.tar.gz
+tar xzf nagios-plugins-2.2.1.tar.gz
+cd nagios-plugins-2.2.1
+sudo ./configure --with-nagios-user=nagios --with-nagios-group=nagios --with-openssl
+sudo make
+sudo make install
+
+#Verify Settings
+/usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg
+service nagios start
+sudo systemctl enable nagios
+
+
+#################################################################################################################################
