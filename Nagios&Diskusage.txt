@@ -76,3 +76,24 @@ sudo systemctl enable nagios
 
 
 #################################################################################################################################
+Make Shell SCript for Replace the aletrt mail id in multiple lines:
+#!/bin/bash
+sed -i 's/to=adr.sysads@paladion.net,mes.platform@paladion.net/to=mes.platform@paladion.net/g' /etc/risqvu_di/RisqVUemailtoolConfig/disk/boot_info.properties
+sed -i 's/to=adr.sysads@paladion.net,mes.platform@paladion.net/to=mes.platform@paladion.net/g' /etc/risqvu_di/RisqVUemailtoolConfig/disk/EmailDataDISKBoot.properties
+sed -i 's/to=adr.sysads@paladion.net,mes.platform@paladion.net/to=mes.platform@paladion.net/g' /etc/risqvu_di/RisqVUemailtoolConfig/disk/EmailDataDISKmnt.properties
+sed -i 's/to=adr.sysads@paladion.net,mes.platform@paladion.net/to=mes.platform@paladion.net/g' /etc/risqvu_di/RisqVUemailtoolConfig/disk/EmailDataDISKdata.properties
+sed -i 's/to=adr.sysads@paladion.net,mes.platform@paladion.net/to=mes.platform@paladion.net/g' /etc/risqvu_di/RisqVUemailtoolConfig/disk/EmailDataDISKdata1.properties 
+sed -i 's/to=adr.sysads@paladion.net,mes.platform@paladion.net/to=mes.platform@paladion.net/g' /etc/risqvu_di/RisqVUemailtoolConfig/disk/EmailDataDISKdata2.properties 
+sed -i 's/to=adr.sysads@paladion.net,mes.platform@paladion.net/to=mes.platform@paladion.net/g' /etc/risqvu_di/RisqVUemailtoolConfig/disk/EmailDataDISKdata3.properties
+sed -i 's/to=adr.sysads@paladion.net,mes.platform@paladion.net/to=mes.platform@paladion.net/g' /etc/risqvu_di/RisqVUemailtoolConfig/disk/EmailDataDISKdata4.properties 
+sed -i 's/to=adr.sysads@paladion.net,mes.platform@paladion.net/to=mes.platform@paladion.net/g' /etc/risqvu_di/RisqVUemailtoolConfig/disk/EmailDataDISKdata5.properties 
+sed -i 's/to=adr.sysads@paladion.net,mes.platform@paladion.net/to=mes.platform@paladion.net/g' /etc/risqvu_di/RisqVUemailtoolConfig/disk/EmailDataDISKdata6.properties 
+sed -i 's/to=adr.sysads@paladion.net,mes.platform@paladion.net/to=mes.platform@paladion.net/g' /etc/risqvu_di/RisqVUemailtoolConfig/disk/EmailDataDISKdata7.properties 
+sed -i 's/to=adr.sysads@paladion.net,mes.platform@paladion.net/to=mes.platform@paladion.net/g' /etc/risqvu_di/RisqVUemailtoolConfig/disk/EmailDataDISKdata8.properties 
+sed -i 's/to=adr.sysads@paladion.net,mes.platform@paladion.net/to=mes.platform@paladion.net/g' /etc/risqvu_di/RisqVUemailtoolConfig/disk/EmailDataDISKdata9.properties
+sed -i 's/to=adr.sysads@paladion.net,mes.platform@paladion.net/to=mes.platform@paladion.net/g' /etc/risqvu_di/RisqVUemailtoolConfig/disk/EmailDataDISKdata10.properties
+sed -i 's/to=adr.sysads@paladion.net,mes.platform@paladion.net/to=mes.platform@paladion.net/g' /etc/risqvu_di/RisqVUemailtoolConfig/CPU/EmailDataCPU.properties
+sed -i 's/to=adr.sysads@paladion.net,mes.platform@paladion.net/to=mes.platform@paladion.net/g' /etc/risqvu_di/RisqVUemailtoolConfig/EmailMemory/EmailDataMemory.properties
+exit
+
+########################################################################################################################################
